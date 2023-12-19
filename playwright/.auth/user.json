@@ -1,0 +1,95 @@
+{
+  "cookies": [
+    {
+      "name": "AUTH_SESSION_ID",
+      "value": "4dfa59ff-98ce-47fd-b652-cdd8eac2fb58.keycloak-8545f4fd59-swxth",
+      "domain": "dev-login.ac1.conservice.com",
+      "path": "/auth/realms/stratus/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "AUTH_SESSION_ID_LEGACY",
+      "value": "4dfa59ff-98ce-47fd-b652-cdd8eac2fb58.keycloak-8545f4fd59-swxth",
+      "domain": "dev-login.ac1.conservice.com",
+      "path": "/auth/realms/stratus/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "KEYCLOAK_IDENTITY",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwNTM1YWIwZC1kNGJiLTRjZTQtOTlkNS05NzYyMGMwMDk2MjMifQ.eyJleHAiOjE3MDM2MTQxNTYsImlhdCI6MTcwMzAwOTM1NiwianRpIjoiM2RmODQ5ZjctZWYwMi00ZmI0LWFmZDYtNWJmYmUxZTIwYzFmIiwiaXNzIjoiaHR0cHM6Ly9kZXYtbG9naW4uYWMxLmNvbnNlcnZpY2UuY29tL2F1dGgvcmVhbG1zL3N0cmF0dXMiLCJzdWIiOiIxM2IwYzAyOS0xNzI0LTQ5YzMtODdmZS04NjU3MDdjYmNiNGUiLCJ0eXAiOiJTZXJpYWxpemVkLUlEIiwic2Vzc2lvbl9zdGF0ZSI6IjRkZmE1OWZmLTk4Y2UtNDdmZC1iNjUyLWNkZDhlYWMyZmI1OCIsInNpZCI6IjRkZmE1OWZmLTk4Y2UtNDdmZC1iNjUyLWNkZDhlYWMyZmI1OCIsInN0YXRlX2NoZWNrZXIiOiJ5LXQ2c2wyTDdZNWxSV3JoZnJtYWZLMUVUOVdlekpETXd5QkZMSF95SjNvIn0.guzcTFyKG2_bOa8ARxMroSGRZxxOnCBYVAvBDa4LJZ0",
+      "domain": "dev-login.ac1.conservice.com",
+      "path": "/auth/realms/stratus/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "KEYCLOAK_IDENTITY_LEGACY",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwNTM1YWIwZC1kNGJiLTRjZTQtOTlkNS05NzYyMGMwMDk2MjMifQ.eyJleHAiOjE3MDM2MTQxNTYsImlhdCI6MTcwMzAwOTM1NiwianRpIjoiM2RmODQ5ZjctZWYwMi00ZmI0LWFmZDYtNWJmYmUxZTIwYzFmIiwiaXNzIjoiaHR0cHM6Ly9kZXYtbG9naW4uYWMxLmNvbnNlcnZpY2UuY29tL2F1dGgvcmVhbG1zL3N0cmF0dXMiLCJzdWIiOiIxM2IwYzAyOS0xNzI0LTQ5YzMtODdmZS04NjU3MDdjYmNiNGUiLCJ0eXAiOiJTZXJpYWxpemVkLUlEIiwic2Vzc2lvbl9zdGF0ZSI6IjRkZmE1OWZmLTk4Y2UtNDdmZC1iNjUyLWNkZDhlYWMyZmI1OCIsInNpZCI6IjRkZmE1OWZmLTk4Y2UtNDdmZC1iNjUyLWNkZDhlYWMyZmI1OCIsInN0YXRlX2NoZWNrZXIiOiJ5LXQ2c2wyTDdZNWxSV3JoZnJtYWZLMUVUOVdlekpETXd5QkZMSF95SjNvIn0.guzcTFyKG2_bOa8ARxMroSGRZxxOnCBYVAvBDa4LJZ0",
+      "domain": "dev-login.ac1.conservice.com",
+      "path": "/auth/realms/stratus/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "KEYCLOAK_SESSION",
+      "value": "stratus/13b0c029-1724-49c3-87fe-865707cbcb4e/4dfa59ff-98ce-47fd-b652-cdd8eac2fb58",
+      "domain": "dev-login.ac1.conservice.com",
+      "path": "/auth/realms/stratus/",
+      "expires": 1703614156.321015,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "KEYCLOAK_SESSION_LEGACY",
+      "value": "stratus/13b0c029-1724-49c3-87fe-865707cbcb4e/4dfa59ff-98ce-47fd-b652-cdd8eac2fb58",
+      "domain": "dev-login.ac1.conservice.com",
+      "path": "/auth/realms/stratus/",
+      "expires": 1703614156.321033,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_hp2_ses_props.282557808",
+      "value": "%7B%22z%22%3A0%2C%22ts%22%3A1703009355104%2C%22d%22%3A%22dev-portal.conservice.com%22%2C%22h%22%3A%22%2Fbilling%22%2C%22t%22%3A%22Conservice%20Portal%22%7D",
+      "domain": ".conservice.com",
+      "path": "/",
+      "expires": 1703011156,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_hp2_id.282557808",
+      "value": "%7B%22userId%22%3A%221005030580618296%22%2C%22pageviewId%22%3A%227071451453720824%22%2C%22sessionId%22%3A%225567155171420252%22%2C%22identity%22%3Anull%2C%22trackerVersion%22%3A%224.0%22%7D",
+      "domain": ".conservice.com",
+      "path": "/",
+      "expires": 1737086956,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://dev-portal.conservice.com",
+      "localStorage": [
+        {
+          "name": "conservice-theme",
+          "value": "light"
+        }
+      ]
+    }
+  ]
+}

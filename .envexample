@@ -1,0 +1,10 @@
+//Copy this file to .env and fillout the required information needed. All fields are checked by default.
+// .env will be ignored on git commit however .envexample WILL BE commited if you change information in here. Keep secrets out!  
+// Base_URL BASE_API_URL and AUTH_URL are the defaults used to get your user token for keycloak. 
+
+TEST_USER=""
+PASSWORD=""
+BASE_URL="https://dev-portal.conservice.com/"
+BASE_API_URL="https://dev-api.ac1.conservice.com"
+AUTH_URL="https://dev-login.ac1.conservice.com/auth/realms/stratus/protocol/openid-connect/token"
+TOKEN=""
