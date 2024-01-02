@@ -1,4 +1,4 @@
-node_modules/
+anode_modules/
 /test-results/
 /playwright-report/
 /playwright/.cache/

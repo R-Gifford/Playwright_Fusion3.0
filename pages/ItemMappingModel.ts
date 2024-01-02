@@ -1,15 +1,17 @@
-import {  Page, Locator} from "playwright/test";
-export class BillEntryPageModel{
+import {  Page, Locator} from "playwright/test"
+export class ItemMappingModel{
   private page: Page;
+
 
 constructor(page: Page, propertyCode: string){
 
 this.page = page;
 
+//manually upload bill Method
 
 
 
-//Toggle Property Search and Ensure Works correctly 
-// child of expaanded drawer
 }}
+
+
 

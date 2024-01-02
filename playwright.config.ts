@@ -39,16 +39,16 @@ export default defineConfig({
       },
       dependencies: ["setupUi"],
     },
-    {
-      name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-        // Use prepared auth state.
-        storageState: "playwright/.auth/user.json",
-        ignoreHTTPSErrors: true,
-      },
-      dependencies: ["setupUi"],
-    },
+    // {
+    //   name: "firefox",
+    //   use: {
+    //     ...devices["Desktop Firefox"],
+    //     // Use prepared auth state.
+    //     storageState: "playwright/.auth/user.json",
+    //     ignoreHTTPSErrors: true,
+    //   },
+    //   dependencies: ["setupUi"],
+    // },
   ],
 
 

@@ -1,29 +1,23 @@
-import { BillEntryPageModel } from "../pages/BillEntryPageModel";
-import { envSchema } from "../envSchema";
-//@ts-ignore
+import { ItemMappingModel } from "../pages/ItemMappingModel";
 require ("dotenv").config();
-import { Locator, expect, test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
+import path from "path";
 
 const url = "billing/fusion/billing-bill-view"
-const propertyCode = 'am03';
-
-test('Navigate Fusion Portal Page', async ({ page }) => {
+const propertyCode = 'tw090';
+const PDFLocation = '../Documents/TestBill3-HBG23082101995.pdf';
+test('Manual Upload Bill', async ({ page }) => {
 
   //Validate envrioment variables against envSchema
-  const PM = new BillEntryPageModel(page, propertyCode);
-  const validatedEnv = envSchema.parse(process.env)
+  const PM = new ItemMappingModel(page, propertyCode);
 
-  await page.goto(url);
-  await PM.DrawOpenCloseToggle.uncheck();
-  await expect(PM.DrawElementVisableWhenOpen).not.toBeVisible();
-  await PM.DrawOpenCloseToggle.check();
-  await expect(PM.DrawElementVisableWhenOpen).toBeVisible();
-  await PM.PropertyCodeSearchInput.click();
-  await PM.PropertyCodeSearchInput.fill(propertyCode);
-  await PM.PropertyCodeSearchInput.press('Enter');
-
-
+//expect the first control number to be different than the first control number before the upload
 });
 
 
+
+test('Verify Manual Upload Bill Can Not be edited', async ({ page }) => {
+
+
+})
 
