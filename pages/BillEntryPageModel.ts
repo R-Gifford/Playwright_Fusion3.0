@@ -19,6 +19,30 @@ export class BillEntryModel{
   manualUploadSection: Locator;
   fileUploadButton: Locator;
   saveBillInfo: Locator;
+  meterItemButton: Locator;
+  dataEntryMeterHeader: Locator;
+  providerMeasureDropDown: Locator;
+  killowattDemandProviderSelect: Locator;
+  meterNumberInputBox: Locator;
+  previousReadInputBox: Locator;
+  currentReadInputBox: Locator;
+  consumptionInputBox: Locator;
+  previousCurrentDateInput: Locator;
+  dataEntrySaveButton: Locator;
+  toastNotificationSaveSuccessful: Locator;
+  expenseSparkLine: Locator;
+  consumptionSparkLine: Locator;
+  chargeItemButton: Locator;
+  dataEntryLineHeader: Locator;
+  lineItemItemNameDropdown: Locator;
+  accountEstabFromDropdown: Locator;
+  amountInputBox: Locator;
+  cycleStartEndInput: Locator;
+  toastNotificationLineSavedSuccessful: Locator;
+  consumptionTotal: Locator;
+  meterItemGridFirstItem: Locator;
+  deleteDataEntryButton: Locator;
+  toastNotificationLineDeleted: Locator;
 
 constructor(page: Page, propertyCode: string){
 
@@ -44,8 +68,30 @@ this.fileUploadIcon = page.locator('#file-upload');
 this.manualUploadSection = page.getByText('Drag and drop files here');
 this.fileUploadButton = page.locator('#file-upload');
 this.saveBillInfo = page.getByRole('button', { name: 'Save Bill Info', exact: true });
-
-
+this.meterItemButton = page.getByLabel('Enter Meter Items');
+this.dataEntryMeterHeader = page.getByRole('button', { name: 'Data Entry - Meter' });
+this.providerMeasureDropDown = page.getByRole('combobox', { name: 'Provider Measure' });
+this.killowattDemandProviderSelect = page.getByRole('option', { name: 'Kilowatt Demand' });
+this.meterNumberInputBox = page.getByLabel('Meter #');
+this.previousReadInputBox = page.getByLabel('Prev. Read', { exact: true }).first();
+this.currentReadInputBox = page.getByLabel('Cur. Read', { exact: true }).first();
+this.consumptionInputBox = page.getByLabel('Cons.', { exact: true }).first();
+this.previousCurrentDateInput = page.getByLabel('Prev. Date - Cur. Date', { exact: true });
+this.dataEntrySaveButton = page.getByRole('button', { name: 'Save', exact: true });
+this.toastNotificationSaveSuccessful= page.getByText('Meter Item Saved Successfully').first();
+this.expenseSparkLine = page.getByRole('row', { name: 'Expense' }).locator('rect').first();
+this.consumptionSparkLine = page.getByRole('row', { name: 'Consumption' }).locator('rect').first();
+this.chargeItemButton = page.getByLabel('Enter Charge Items');
+this.dataEntryLineHeader = page.getByRole('button', { name: 'Data Entry - Line' });
+this.lineItemItemNameDropdown = page.getByRole('combobox', { name: 'Item Name' });
+this.accountEstabFromDropdown = page.getByRole('option', { name: 'Acct Estab Chg', exact: true });
+this.amountInputBox = page.getByLabel('Amount', { exact: true }).first();
+this.cycleStartEndInput = page.getByPlaceholder('MM / DD / YYYY⁩ – ⁦MM / DD / YYYY');
+this.toastNotificationLineSavedSuccessful = page.getByText('Line Item Saved');
+this.consumptionTotal = page.getByText('Meter ItemsMeter').locator('.MuiTypography-root').getByText('Cons');
+this.meterItemGridFirstItem = page.locator('#manual_upload_meter_items_panel_id').getByRole('row').nth(1);
+this.deleteDataEntryButton = page.getByRole('button', { name: 'Delete', exact: true });
+this.toastNotificationLineDeleted = page.getByText('Meter Item Deleted');
 
 
 
