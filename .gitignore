@@ -4,3 +4,4 @@ anode_modules/
 /playwright/.cache/
 /authetication
 .env
+playwright/.auth/user.json
