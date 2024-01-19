@@ -1,15 +1,19 @@
 import { BillEntryModel } from "../pages/BillEntryPageModel";
 require ("dotenv").config();
 import { expect, test } from '@playwright/test';
-import path from "path";
+import path from "path"; //needed for upload test bill
 
 const url = "billing/fusion/billing-bill-view"
 const propertyCode = 'tw090';
 const secondPropertyCode = 'am03';
 const PDFLocation = '../Documents/TestBill3-HBG23082101995.pdf';
-test('Manual Upload Bill', async ({ page }) => {
 
-//Validate envrioment variables against envSchema
+test('Manual Upload Bill', async ({ page }) => {
+/* Search a property by code, click an account, sort bills by desending order and save the first control number,
+ click the manual upload bill, Expect the upload icon to show, upload test bill,
+ click different account, click back into orgional account, expect that newest bill control number is different than previous.
+ **NOTE** Control number can not be determined before or during upload, it will however have a sequencial number.
+*/ 
 const PM = new BillEntryModel(page, propertyCode);
 await page.goto(url);
 await PM.propertyCodeSearch.click();
@@ -17,7 +21,7 @@ await PM.propertyCodeSearch.fill(propertyCode);
 await PM.propertyCodeSearch.press('Enter');
 await PM.accountNumber.click();
 await PM.manualUploadBill.click();
-await expect(PM.manualBillUploadInfoScreen).toBeVisible();
+await expect(PM.manualBillUploadIcon).toBeVisible();
 //Hover over sort arrow and sort to decending order
 await PM.controlNumberHeader.hover();
 await PM.sortArrow.click();
@@ -41,8 +45,8 @@ await expect(firstControlNumber).not.toEqual(newUploadedFirstControlNumber);
 });
 
 
-test('Verify Manual Upload Bill Can Not be edited', async ({ page }) => {
-
+test('Verify Legacy Bill Can Not be edited', async ({ page }) => {
+// Search property, click specific account and bill that is legacy, expect no edit informatino to be visable.
   const PM = new BillEntryModel(page, propertyCode);
   await page.goto(url);
   await PM.propertyCodeSearch.click();
@@ -54,7 +58,9 @@ test('Verify Manual Upload Bill Can Not be edited', async ({ page }) => {
 })
 
 test('Edit Meter entries', async ({ page }) => {
-
+/*Search property, click account and bill, click meter icon,
+fill out meter information using keyboard only ( developer focused on keyboard focused input)
+submit meter info, expect toast notifaction that it was successful.*/
   const PM = new BillEntryModel(page, secondPropertyCode);
   await page.goto(url);
   await PM.propertyCodeSearch.click();
@@ -75,15 +81,19 @@ test('Edit Meter entries', async ({ page }) => {
   await PM.currentReadInputBox.press('Tab');
   await PM.consumptionInputBox.fill('09');
   await PM.consumptionInputBox.press('Tab');
-  await PM.previousCurrentDateInput.fill('12 / 01 / 2023⁩ – ⁦12 / 28 / 3');
+  await page.keyboard.type('12012023');
   await PM.previousCurrentDateInput.press('Tab');
+  await page.keyboard.type('12302023');
+  await PM.previousCycleEndInput.press('Tab');
   await PM.dataEntrySaveButton.press('Enter');
   await PM.dataEntrySaveButton.click();
   await expect(PM.toastNotificationSaveSuccessful).toBeVisible();
 })
 
 test('Verify Spark Lines Show', async ({ page }) => {
-
+/*search property, click account and bill, expect sparklines to show.
+**NOTE** sparklines currently take many many seconds to load so timeout is needed. 
+Techdebt ticket is in to address */
   const PM = new BillEntryModel(page, secondPropertyCode);
   await page.goto(url);
   await PM.propertyCodeSearch.click();
@@ -93,11 +103,12 @@ test('Verify Spark Lines Show', async ({ page }) => {
   await page.getByRole('cell', { name: 'BMB23122800001' }).click();
   await expect(PM.expenseSparkLine).toBeVisible({timeout: 25000});
   await expect(PM.consumptionSparkLine).toBeVisible();
-
 });
 
 test('Edit Line Item Entries', async ({ page }) => {
-
+/*Search property, click account and bill, click line icon,
+fill out line information using keyboard only ( developer focused on keyboard focused input)
+submit line info, expect toast notifaction that it was successful.*/
   const PM = new BillEntryModel(page, secondPropertyCode);
   await page.goto(url);
   await PM.propertyCodeSearch.click();
@@ -112,15 +123,19 @@ test('Edit Line Item Entries', async ({ page }) => {
   await PM.lineItemItemNameDropdown.press('Tab');
   await PM.amountInputBox.fill('50');
   await PM.amountInputBox.press('Tab');
-  await PM.cycleStartEndInput.fill('12 / 01 / 2023⁩ – ⁦12 / 29 / 3');
-  await PM.cycleStartEndInput.press('Tab');
+  await page.keyboard.type('12012023');
+  await PM.previousCurrentDateInput.press('Tab');
+  await page.keyboard.type('12302023');
+  await PM.previousCycleEndInput.press('Tab');
   await PM.dataEntrySaveButton.press('Enter');
   await expect(PM.toastNotificationLineSavedSuccessful).toBeVisible();
 })
 
 
 test('Delete Meter Item and Consumption updates', async ({ page }) => {
-
+/*search property, select specific account and bill, save current cons amount,
+click delete for meter item. Expect updated cons to be different than previous.
+ */
   const PM = new BillEntryModel(page, secondPropertyCode);
   await page.goto(url);
   await PM.propertyCodeSearch.click();
@@ -136,5 +151,4 @@ test('Delete Meter Item and Consumption updates', async ({ page }) => {
   await expect(PM.toastNotificationLineDeleted).toBeVisible();
   let endingCons = await PM.consumptionTotal.innerText();
   await expect(startingCons).not.toEqual(endingCons);
-
 });
