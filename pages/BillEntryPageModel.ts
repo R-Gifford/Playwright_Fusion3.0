@@ -4,7 +4,7 @@ export class BillEntryModel{
   propertyCodeSearch: Locator;
   accountNumber: Locator;
   manualUploadBill: Locator;
-  manualBillUploadInfoScreen: Locator;
+  manualBillUploadIcon: Locator;
   numberOfRowsInBillTable: Locator;
   removeSelectedUploadedFilesButton: Locator;
   selectUploadedFileForRemovalCheckbox: Locator;
@@ -43,17 +43,16 @@ export class BillEntryModel{
   meterItemGridFirstItem: Locator;
   deleteDataEntryButton: Locator;
   toastNotificationLineDeleted: Locator;
+  previousCycleEndInput: Locator;
 
 constructor(page: Page, propertyCode: string){
 
 this.page = page;
 
-//manually upload bill Method
-
 this.propertyCodeSearch = page.getByLabel('Property Code(s)');
 this.accountNumber = page.getByRole('cell', { name: '002-0625-0084682' });
 this.manualUploadBill = page.getByLabel('Manually upload bill');
-this.manualBillUploadInfoScreen = page.getByRole('heading', { name: 'Upload Bills For TRASH Account - 002-0625-0084682' });
+this.manualBillUploadIcon = page.getByTestId('FileUploadIcon');
 this.numberOfRowsInBillTable =  page.locator('#manual_upload_bill_panel_id').getByRole('row');
 this.removeSelectedUploadedFilesButton = page.getByRole('button', { name: 'Remove Selected Files' });
 this.selectUploadedFileForRemovalCheckbox = page.getByLabel('Select row');
@@ -65,7 +64,7 @@ this.sortArrow = page.getByRole('button', { name: 'Sort' });
 this.decendingOrderArrow = page.getByTestId('ArrowDownwardIcon');
 this.billsFirstCellText = page.locator('#manual_upload_bill_panel_id').getByRole('row').nth(1).getByRole('cell').first();
 this.fileUploadIcon = page.locator('#file-upload');
-this.manualUploadSection = page.getByText('Drag and drop files here');
+this.manualUploadSection = page.locator('#file-upload');
 this.fileUploadButton = page.locator('#file-upload');
 this.saveBillInfo = page.getByRole('button', { name: 'Save Bill Info', exact: true });
 this.meterItemButton = page.getByLabel('Enter Meter Items');
@@ -76,7 +75,8 @@ this.meterNumberInputBox = page.getByLabel('Meter #');
 this.previousReadInputBox = page.getByLabel('Prev. Read', { exact: true }).first();
 this.currentReadInputBox = page.getByLabel('Cur. Read', { exact: true }).first();
 this.consumptionInputBox = page.getByLabel('Cons.', { exact: true }).first();
-this.previousCurrentDateInput = page.getByLabel('Prev. Date - Cur. Date', { exact: true });
+this.previousCurrentDateInput = page.getByRole('textbox', { name: 'Cycle Start' });
+this.previousCycleEndInput =  page.getByRole('textbox', { name: 'Cycle End' });
 this.dataEntrySaveButton = page.getByRole('button', { name: 'Save', exact: true });
 this.toastNotificationSaveSuccessful= page.getByText('Meter Item Saved Successfully').first();
 this.expenseSparkLine = page.getByRole('row', { name: 'Expense' }).locator('rect').first();
@@ -86,7 +86,6 @@ this.dataEntryLineHeader = page.getByRole('button', { name: 'Data Entry - Line' 
 this.lineItemItemNameDropdown = page.getByRole('combobox', { name: 'Item Name' });
 this.accountEstabFromDropdown = page.getByRole('option', { name: 'Acct Estab Chg', exact: true });
 this.amountInputBox = page.getByLabel('Amount', { exact: true }).first();
-this.cycleStartEndInput = page.getByPlaceholder('MM / DD / YYYY⁩ – ⁦MM / DD / YYYY');
 this.toastNotificationLineSavedSuccessful = page.getByText('Line Item Saved');
 this.consumptionTotal = page.getByText('Meter ItemsMeter').locator('.MuiTypography-root').getByText('Cons');
 this.meterItemGridFirstItem = page.locator('#manual_upload_meter_items_panel_id').getByRole('row').nth(1);
