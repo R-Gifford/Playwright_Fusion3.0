@@ -13,9 +13,9 @@ constructor(page: Page){
 this.page = page;
 this.navBar = page.locator('[id="single-spa-application\\:\\@conservice\\/navbar"]').getByRole('button').first()
 this.FusionPageCrumbTextOnly = page.getByText('Fusion Portal');
-this.AccountAssignmentNavigationCard =  page.getByRole('button', { name: 'Account Assignment Setup utility provider accounts specifically for billing.' })
+this.AccountAssignmentNavigationCard =  page.getByRole('button', { name: 'Account Assignment Map Utility Provider Accounts to Properties.' })
 this.FusionPortalCrumbLink = page.getByRole('link', { name: 'Fusion Portal' });
-this.SettingsNavigationCard = page.getByRole('button', { name: 'Settings Fusion run settings for Management Companies, States, etc...' })
+this.SettingsNavigationCard = page.getByRole('button', { name: 'Settings Setting to control running fusion for Management Companies, States, and Cities.' })
 this.ConserviceLogo = page.locator('div').filter({ hasText: 'The Utility Experts' }).nth(2);
 
 
@@ -23,7 +23,7 @@ this.ConserviceLogo = page.locator('div').filter({ hasText: 'The Utility Experts
 
 }
   async navigateToLoginPage(){
-    await this.page.goto('https://dev-portal.conservice.com/billing');
+    await this.page.goto('https://staging-portal.conservice.com/billing');
 
   }
 

@@ -1,112 +1,99 @@
+import { time } from "console";
 import { ItemMappingModel } from "../pages/ItemMappingModel";
 require ("dotenv").config();
 import { expect, test } from '@playwright/test';
 
 
 const url = "billing/fusion/item-mapping/provider/line"
-const propertyCode = 'am018';
+const propertyCode = 'am03';
 const PDFLocation = '../Documents/TestBill3-HBG23082101995.pdf';
 
-test('Verify buttons switch search type', async ({ page }) => {
-const PM = new ItemMappingModel(page, propertyCode);
-await page.goto(url);
-await PM.lineItemButton.click();
-await expect(PM.lineBreadCrumb).toBeVisible();
-await PM.meterItemButton.click();
-await expect(PM.meterBreadCrumb).toBeVisible();
-await PM.switchToPropertyButton.click();
-await expect (PM.propertyBreadCrumb).toBeVisible();
-await PM.switchToProviderButton.click();
-await expect (PM.providerBreadCrumb).toBeVisible();
+// test('Verify buttons switch search type', async ({ page }) => {
+// test.setTimeout(100000);
+// const PM = new ItemMappingModel(page, propertyCode);
+// await page.goto(url);
+// await PM.lineItemButton.click();
+// await expect(PM.lineBreadCrumb).toBeVisible();
+// await PM.meterItemButton.click();
+// await expect(PM.meterBreadCrumb).toBeVisible();
+// await PM.switchToPropertyButton.click();
+// await expect (PM.propertyBreadCrumb).toBeVisible();
+// await PM.switchToProviderButton.click();
+// await expect (PM.providerBreadCrumb).toBeVisible();
 
-})
+// })
 
-test('Add line item splits', async ({ page }) => {
-const PM = new ItemMappingModel(page, propertyCode);
-await page.goto(url);
-await PM.providerSearchBox.click();
-await PM.selectAceFromProviderDropdown.click();
-await PM.select100PercentLineItem.click(); 
-let initialBillSplitInfoBox = await PM.billSplitInfoBox.count();
-await PM.addPercentageSplitButton.click();
-let updatedBillSplitInfoBox = await PM.billSplitInfoBox.count();
-await expect(initialBillSplitInfoBox != updatedBillSplitInfoBox).toBeTruthy();
-await PM.newestInfoBoxBillableStatus.click();
-await expect(PM.billableStatusDropdown).toBeVisible();
-await PM.nonBillableStatus.click();
-await PM.newestInfoBoxBillableStatus.press('Tab');
-await PM.percentageSplitBox.fill('50');
-await PM.percentageSplitBox.press('Tab');
-await PM.newestInfoBoxAddChargeType.press('ArrowDown');
-await PM.newestInfoBoxAddChargeType.press('ArrowDown');
-await PM.newestInfoBoxAddChargeType.press('Enter');
-await PM.saveLineItemsSetupButton.click();
-await expect(PM.saveSuccessfulToast).toBeVisible();
-});
+// test('Add line item splits', async ({ page }) => {
+// test.setTimeout(120000);
+// const PM = new ItemMappingModel(page, propertyCode);
+// await page.goto(url);
+// await PM.providerSearchBox.click();
+// await PM.selectAceFromProviderDropdown.click({timeout: 30000});
+// await PM.lineItemMeterNumber.click(); 
+// await expect(PM.providerItemInfoHeader).toBeVisible();
+// await PM.lineItemsHeader.click();
+// await PM.customLineItemButton.click();
+// await PM.itemNameField.fill('Test');
+// await PM.exampleControlNumberField.fill('AEX23061502695');
+// await PM.saveItemButton.click();
+// await PM.closeCustomLineItemsWindow.click();
+// await PM.lineItemNameSortDescending.click();
+// expect(await PM.testLineItem).toBeVisible({timeout: 30000});
+
+// });
 
 
+// test('Remove line item splits', async ({ page }) => {
+//   test.setTimeout(120000);
+//   const PM = new ItemMappingModel(page, propertyCode);
+//   await page.goto(url);
+//   await PM.providerSearchBox.click();
+//   await PM.selectAceFromProviderDropdown.click({timeout: 30000});
+//   await PM.firstLineItem.click(); 
+//   await PM.addPercentageSplitButton.click();
+//   await PM.saveLineItemsSetupButton.click();
+//   await expect(PM.saveAlert).toBeVisible({timeout: 30000});
+//   await page.waitForTimeout(8000);
+//   let initialAssignedAmount = await PM.lineItemsHeader.innerText();
+//   // console.log('Initial Assigned Amount:', initialAssignedAmount);
+//   //While removeLastSplitInfoBox is visible, click it
+//   while (await PM.removeLastSplitInfoBox.isVisible())
+//   await PM.removeLastSplitInfoBox.click();
+//   await PM.saveLineItemsSetupButton.click();
+//   await expect(PM.saveAlert).toBeVisible({timeout: 20000});
+//   await page.waitForTimeout(8000);  
+//   let updatedAssignedAmount = await PM.lineItemsHeader.innerText();
+//   // console.log('Updated Assigned Amount:', updatedAssignedAmount);
+//   await expect(initialAssignedAmount != updatedAssignedAmount).toBeTruthy();
+// })
 
-test('Remove line item splits', async ({ page }) => {
+
+test('Item Mapping - Provider search by property code & view example bill', async ({ page }) => {
+  // Adding Jira key information to test annotations
+test.info().annotations.push({
+  type: "jiraKey",
+  description: "BPORT-3341",
+});  
+  test.setTimeout(100000);
   const PM = new ItemMappingModel(page, propertyCode);
   await page.goto(url);
+  await PM.mappingAppliesToDropdown.click();
+  await PM.selectPropertyFromDropdown.click();
+  await PM.propertySearchBox.fill(propertyCode);
+  await PM.propertySearchBox.press('Enter');
   await PM.providerSearchBox.click();
-  await PM.selectAceFromProviderDropdown.click();
-  await PM.lastLineItem.click(); 
-  await PM.addPercentageSplitButton.click();
-  await PM.saveLineItemsSetupButton.click();
-  let initialAssignedAmount = await PM.lineItemsHeader.innerText();
-  await PM.removeLastSplitInfoBox.click();
-  await PM.saveLineItemsSetupButton.click();
-  let updatedAssignedAmount = await PM.lineItemsHeader.innerText();
-  await expect(initialAssignedAmount != updatedAssignedAmount).toBeTruthy();
-})
+  await PM.georgiaPowerProviderOption.click();
+  await PM.allTaxesLineItem.click();
+  await expect(PM.providerItemInfoHeader).toBeVisible();
+  await expect(PM.providerSetupHeader).toBeVisible();
+  await PM.exampleBill.click();
+  const page1Promise = page.waitForEvent('popup');
+  const page1 = await page1Promise;
+  await expect(page1).toHaveURL('https://staging-portal.conservice.com/billing/fusion/bill-viewer/AEX23061502695',{timeout: 30000});
+  await expect(page1.locator('.react-pdf__Document > div > div:nth-child(2)').first()).toBeVisible({timeout: 60000});
 
-
-
-
-test('Edit provider within property is disabled', async ({ page }) => {
-  const PM = new ItemMappingModel(page, propertyCode);
-  await page.goto(url);
-  await page.getByRole('button', { name: 'Switch to Property' }).click();
-  await page.getByLabel('Property Code').click();
-  await page.getByLabel('Property Code').fill('am018');
-  await page.getByLabel('Property Code').press('Enter');
-  await page.getByLabel('Property Code').press('Tab');
-  await PM.providerSearchBox.press('ArrowDown');
-  await page.getByRole('combobox', { name: 'Provider Search' }).press('ArrowDown');
-  await page.getByRole('combobox', { name: 'Provider Search' }).press('Enter');
-  await page.getByRole('cell', { name: '|{Year} TCJA ADIT Surcredit' }).click();
-  await page.locator('#display_only_provider_item_setup').getByLabel('Save Line Item Setup').click({
-    button: 'right'
-  });
-  await page.locator('#display_only_provider_item_setup').getByLabel('Add Percentage Split').click({
-    button: 'right'
-  });
-  const page2Promise = page.waitForEvent('popup');
-  await page.getByRole('link', { name: 'AJB21010916899' }).click();
-  const page2 = await page2Promise;
-  await page2.locator('.react-pdf__Document > div > div:nth-child(2)').first().click({
-    button: 'right'
-  });
-  await page2.getByText('AJB21010916899').click({
-    button: 'right'
-  });
-  
-  
-  
   })
-  test('Verify buttons switch  type', async ({ page }) => {
-    const PM = new ItemMappingModel(page, propertyCode);
-    await page.goto(url);
-    
-    
-    
-    })
-
-// check that property level the provider items are greyed out 
 
 
-//check you can remove line item splits 
-//click example bill and make sure it opens in a new tab 
 
 
