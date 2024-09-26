@@ -65,6 +65,9 @@ export class BillEntryModel{
   waterResConsumptionProviderSelect: Locator;
   abbyyLiteUploadToggle: Locator;
   meterItemsSection: Locator;
+  dataEntrySaveAllButton: Locator;
+  massSelectAccountNumbersDropdown: Locator;
+  firstAccountNumberMassSelect: Locator;
 
 constructor(page: Page, propertyCode: string){
 
@@ -77,7 +80,8 @@ this.accountNumber2 = page.getByRole('cell', { name: '3055064819' });
 this.accountNumberinList1stClick = page.getByText('Accounts for Town Square at Mark Center IAccount').getByRole('cell').nth(2);
 this.accountNumberinList2ndClick = page.getByText('Accounts for Town Square at Mark Center IAccount').getByRole('cell').nth(0);
 this.adjustmentsFromDropdown = page.getByRole('option', { name: 'Adjustments' }).first();
-this.amountInputBox = page.getByLabel('Amount', { exact: true }).first();
+this.amountInputBox = page.getByRole('spinbutton').first()
+//this.amountInputBox = page.getByLabel('Amount', { exact: true }).first();
 this.ascendingOrderArrow = page.getByText('Bills for 1027-210037313529Control NumberService StartService End').getByTestId('ArrowUpwardIcon').first(); 
 this.balanceForwardFromDropdown = page.getByRole('option', { name: 'Balance Forward' }).first();
 this.billImagesSuccessfulAlert = page.getByText('Bill images successfully uploaded.');
@@ -95,6 +99,7 @@ this.cycleStartEndInput = page.getByRole('textbox', { name: 'Cycle Start' });
 this.dataEntryLineHeader = page.getByRole('button', { name: 'Data Entry - Line' });
 this.dataEntryMeterHeader = page.getByRole('button', { name: 'Data Entry - Meter' });
 this.dataEntrySaveButton = page.getByRole('button', { name: 'Save', exact: true });
+this.dataEntrySaveAllButton = page.getByRole('button', { name: 'Save All', exact: true });
 this.decendingOrderArrow = page.getByTestId('ArrowDownwardIcon');
 this.deleteBillButton = page.getByRole('button', { name: 'Delete Bill', exact: true });
 this.deleteBillSuccessfulAlert = page.getByRole('alert');
@@ -102,9 +107,12 @@ this.deleteDataEntryButton = page.getByRole('button', { name: 'Delete', exact: t
 this.expenseSparkLine = page.getByRole('row', { name: 'Expense' }).locator('rect').first();
 this.fileUploadButton = page.locator('#file-upload');
 this.fileUploadIcon = page.locator('#file-upload');
+this.firstAccountNumberMassSelect = page.getByRole('option', { name: '' }).first();
 this.HCFUsageProviderSelect = page.getByRole('option', { name: 'HCF Usage' }).first();
 this.hundredGallonsProviderSelect = page.getByRole('option', { name: '100 gal Usage' });
-this.lineItemItemNameDropdown = page.getByRole('combobox', { name: 'Item Name' });
+this.lineItemItemNameDropdown = page.locator('#entry_item_name_id').first()
+//this.lineItemItemNameDropdown = page.getByRole('combobox', { name: 'Item Name' });
+this.massSelectAccountNumbersDropdown = page.getByLabel('Mass Select Account Number(s)');
 this.manualBillUploadIcon = page.getByTestId('FileUploadIcon');
 this.manualUploadAccountNumber = page.getByRole('cell', { name: '1027-210037313529' });
 this.manualUploadBill = page.getByLabel('Manually upload bill');
@@ -116,8 +124,8 @@ this.meterItemsSection = page.getByRole('button', { name: 'Meter Items - Total:'
 this.meterNumberInputBox = page.getByLabel('Meter #');
 this.meterNumberItemSelect = page.getByRole('cell', { name: '90619014' });
 this.numberOfRowsInBillTable =  page.locator('#manual_upload_bill_panel_id').getByRole('row');
-this.previousCurrentDateInput = page.getByRole('textbox', { name: 'Cycle Start' });
-this.previousCycleEndInput =  page.getByRole('textbox', { name: 'Cycle End' });
+this.previousCurrentDateInput = page.getByRole('textbox', { name: 'Cycle Start' }).first();
+this.previousCycleEndInput =  page.getByRole('textbox', { name: 'Cycle End' }).first();
 this.previousReadInputBox = page.getByLabel('Prev. Read', { exact: true }).first();
 this.propertyCodeSearch = page.getByLabel('Property Code(s)');
 this.providerMeasureDropDown = page.getByRole('combobox', { name: 'Provider Measure' });
@@ -129,7 +137,7 @@ this.sortArrow = page.getByRole('button', { name: 'Sort' });
 this.thousandGallonsProviderSelect = page.getByRole('option', { name: 'Thousand Gallons' });
 this.toastNotificationLineDeleted = page.getByText('Meter Item Deleted');
 this.toastNotificationLineDidNotDeleted = page.getByText('\'BME24020100457\' Bills assigned to a billing instance cannot be modified.');
-this.toastNotificationLineSavedNotSuccessful = page.getByText('\'BME24020100457\' Bills assigned to a billing instance cannot be modified.');
+this.toastNotificationLineSavedNotSuccessful = page.getByText('\'BME24020100457\' Bills assigned to a billing instance cannot be modified.').first( );
 this.toastNotificationLineSavedSuccessful = page.getByText('Line Item Saved');
 this.toastNotificationSaveNotSuccessful= page.getByText('cannot be modified').first();
 this.toastNotificationSaveSuccessful= page.getByText('Meter Item Saved Successfully').first();

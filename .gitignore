@@ -5,3 +5,4 @@ anode_modules/
 /authetication
 .env
 playwright/.auth/user.json
+.env.local

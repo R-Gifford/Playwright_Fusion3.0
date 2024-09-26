@@ -34,11 +34,14 @@ await expect(PM.manualBillUploadIcon).toBeVisible();
 //await PM.controlNumberHeader.hover();
 //await PM.sortArrow.click();
 //await expect (PM.ascendingOrderArrow).toBeVisible();
-let firstControlNumber = await PM.billsFirstCellText.innerText();
-console.log(firstControlNumber);
+//let firstControlNumber = await PM.billsFirstCellText.innerText();
+//console.log(firstControlNumber);
 await expect(PM.fileUploadIcon).toBeVisible();
 await PM.fileUploadButton.setInputFiles(path.join(__dirname, PDFLocation));
 await expect(PM.removeUploadedFilesButton).toBeVisible();
+await PM.massSelectAccountNumbersDropdown.click();
+await PM.firstAccountNumberMassSelect.click();
+await page.keyboard.press('Escape');
 await PM.abbyyLiteUploadToggle.click();
 await PM.uploadFilesConfirmButton.click();
 await expect(PM.billImagesSuccessfulAlert).toBeVisible({timeout: 10000});
@@ -166,7 +169,7 @@ const PM = new BillEntryModel(page, thirdPropertyCode);
   await PM.previousCurrentDateInput.press('Tab');
   await page.keyboard.type('12302023');
   await PM.previousCycleEndInput.press('Tab');
-  await PM.dataEntrySaveButton.press('Enter');
+  await PM.dataEntrySaveAllButton.press('Enter');
   await expect(PM.toastNotificationLineSavedNotSuccessful).toBeVisible({timeout: 30000});
 })
 

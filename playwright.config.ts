@@ -1,6 +1,7 @@
-import { defineConfig, devices } from '@playwright/test';
-//@ts-ignore
-require('dotenv').config();
+import { defineConfig, devices } from "@playwright/test";
+//detects if the environment is local or CI: Then selects .env or .env.local
+const CI = process.env.CI == "true";
+require("dotenv").config({ path: CI ? ".env" : ".env.local" });
 
 export default defineConfig({
   /* Run tests in files in parallel */
